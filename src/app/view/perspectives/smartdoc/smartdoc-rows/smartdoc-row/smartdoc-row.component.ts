@@ -17,28 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Injectable, Pipe, PipeTransform} from '@angular/core';
-import {I18n} from '@ngx-translate/i18n-polyfill';
-
-@Pipe({
-  name: 'perspectiveName',
+import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import {DivisionType, SmartDocRow} from '../../../../../core/store/smartdoc/smartdoc';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+@Component({
+  selector: 'smartdoc-row',
+  templateUrl: './smartdoc-row.component.html',
+  styleUrls: ['./smartdoc-row.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-@Injectable({
-  providedIn: 'root',
-})
-export class PerspectiveNamePipe implements PipeTransform {
-  public constructor(private i18n: I18n) {}
+export class SmartdocRowComponent {
+  @Input()
+  public row: SmartDocRow;
 
-  public transform(perspective: string): string {
-    return this.i18n(
-      {
-        id: 'view.perspective.name',
-        value:
-          '{perspective, select, detail {Detail} pivot {Pivot} kanban {Kanban} chart {Chart} ganttChart {Timelines} calendar {Calendar} map {Map} search {Search} table {Table} smartDoc {Smart Document}}',
-      },
-      {
-        perspective,
-      }
-    );
+  public readonly divisionType = DivisionType;
+
+  public drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.row.cells, event.previousIndex, event.currentIndex);
   }
 }

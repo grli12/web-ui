@@ -17,28 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Injectable, Pipe, PipeTransform} from '@angular/core';
-import {I18n} from '@ngx-translate/i18n-polyfill';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Routes, RouterModule} from '@angular/router';
+import {SmartdocPerspectiveComponent} from './smartdoc-perspective.component';
 
-@Pipe({
-  name: 'perspectiveName',
-})
-@Injectable({
-  providedIn: 'root',
-})
-export class PerspectiveNamePipe implements PipeTransform {
-  public constructor(private i18n: I18n) {}
+const smartDocRoutes: Routes = [
+  {
+    path: '',
+    component: SmartdocPerspectiveComponent,
+  },
+];
 
-  public transform(perspective: string): string {
-    return this.i18n(
-      {
-        id: 'view.perspective.name',
-        value:
-          '{perspective, select, detail {Detail} pivot {Pivot} kanban {Kanban} chart {Chart} ganttChart {Timelines} calendar {Calendar} map {Map} search {Search} table {Table} smartDoc {Smart Document}}',
-      },
-      {
-        perspective,
-      }
-    );
-  }
-}
+@NgModule({
+  imports: [RouterModule.forChild(smartDocRoutes)],
+  exports: [RouterModule],
+})
+export class SmartdocPerspectiveRoutingModule {}

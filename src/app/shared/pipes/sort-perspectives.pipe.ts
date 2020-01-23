@@ -35,7 +35,7 @@ export class SortPerspectivesPipe implements PipeTransform {
           {
             id: 'view.perspective.name',
             value:
-              '{aperspective, select, detail {Detail} pivot {Pivot} kanban {Kanban} chart {Chart} ganttChart {Timelines} calendar {Calendar} map {Map} search {Search} table {Table} smartdoc {Smart document}}',
+              '{aperspective, select, detail {Detail} pivot {Pivot} kanban {Kanban} chart {Chart} ganttChart {Timelines} calendar {Calendar} map {Map} search {Search} table {Table} smartDoc {Smart Document}}',
           },
           {
             aperspective,

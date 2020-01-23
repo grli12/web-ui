@@ -73,6 +73,7 @@ import {searchesReducer} from './searches/searches.reducer';
 import {SequencesEffects} from './sequences/sequences.effects';
 import {sequencesReducer} from './sequences/sequences.reducer';
 import {constraintDataReducer} from './constraint-data/constraint-data.reducer';
+import {smartDocReducer} from './smartdoc/smartdoc.reducer';
 
 const reducers: ActionReducerMap<AppState> = {
   collections: collectionsReducer,
@@ -103,6 +104,7 @@ const reducers: ActionReducerMap<AppState> = {
   searches: searchesReducer,
   sequences: sequencesReducer,
   constraintData: constraintDataReducer,
+  smartDoc: smartDocReducer,
 };
 
 const effects = [

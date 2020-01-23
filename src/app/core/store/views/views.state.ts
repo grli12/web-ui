@@ -36,6 +36,7 @@ import {selectTableConfig} from '../tables/tables.selector';
 import {DefaultViewConfig, View, ViewConfig, ViewGlobalConfig} from './view';
 import {isViewConfigChanged} from './view.utils';
 import {selectSearchConfig} from '../searches/searches.state';
+import {selectSmartDocConfig} from '../smartdoc/smartdoc.state';
 
 export interface ViewsState extends EntityState<View> {
   loaded: boolean;
@@ -80,7 +81,7 @@ export const selectViewsLoaded = createSelector(
   state => state.loaded
 );
 
-const selectConfigs = createSelector(
+const _selectConfigs1 = createSelector(
   selectTableConfig,
   selectChartConfig,
   selectMapConfig,
@@ -101,12 +102,31 @@ const selectConfigs = createSelector(
   })
 );
 
+const selectConfigs = createSelector(
+  _selectConfigs1,
+  selectSmartDocConfig,
+  (configs1, smartDocConfig) => ({
+    ...configs1,
+    smartDocConfig,
+  })
+);
+
 export const selectPerspectiveConfig = createSelector(
   selectPerspective,
   selectConfigs,
   (
     perspective,
-    {tableConfig, chartConfig, mapConfig, ganttChartConfig, calendarConfig, kanbanConfig, pivotConfig, searchConfig}
+    {
+      tableConfig,
+      chartConfig,
+      mapConfig,
+      ganttChartConfig,
+      calendarConfig,
+      kanbanConfig,
+      pivotConfig,
+      searchConfig,
+      smartDocConfig,
+    }
   ) =>
     ({
       [Perspective.Map]: mapConfig,
@@ -117,6 +137,7 @@ export const selectPerspectiveConfig = createSelector(
       [Perspective.Kanban]: kanbanConfig,
       [Perspective.Pivot]: pivotConfig,
       [Perspective.Search]: searchConfig,
+      [Perspective.SmartDoc]: smartDocConfig,
     }[perspective])
 );
 

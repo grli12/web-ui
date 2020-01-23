@@ -86,6 +86,11 @@ const viewRoutes: Routes = [
           import('./perspectives/search/search-perspective.module').then(m => m.SearchPerspectiveModule),
       },
       {
+        path: Perspective.SmartDoc,
+        loadChildren: () =>
+          import('./perspectives/smartdoc/smartdoc-perspective.module').then(m => m.SmartDocPerspectiveModule),
+      },
+      {
         path: Perspective.Table,
         component: TablePerspectiveComponent,
       },

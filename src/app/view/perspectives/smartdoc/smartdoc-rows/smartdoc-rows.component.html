@@ -1,0 +1,16 @@
+
+<div class="grid-container"  cdkDropList id="list-rows" (cdkDropListDropped)="drop($event)" #origin>
+    <smartdoc-row
+      *ngFor="let row of rowsCollection.rows; let i = index"
+      [row]="row"
+      cdkDrag
+    >
+    </smartdoc-row>
+
+    <div>
+      <button class="btn btn-primary" (click)="onAddRow()">
+        AddRow
+      </button>
+    </div>
+</div>
+

@@ -17,28 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Injectable, Pipe, PipeTransform} from '@angular/core';
-import {I18n} from '@ngx-translate/i18n-polyfill';
+import {Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef} from '@angular/core';
+import {CollapsibleSidebarComponent} from '../../../shared/collapsible-sidebar/collapsible-sidebar.component';
 
-@Pipe({
-  name: 'perspectiveName',
+@Component({
+  selector: 'smartdoc-perspective',
+  templateUrl: './smartdoc-perspective.component.html',
+  styleUrls: ['./smartdoc-perspective.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-@Injectable({
-  providedIn: 'root',
-})
-export class PerspectiveNamePipe implements PipeTransform {
-  public constructor(private i18n: I18n) {}
-
-  public transform(perspective: string): string {
-    return this.i18n(
-      {
-        id: 'view.perspective.name',
-        value:
-          '{perspective, select, detail {Detail} pivot {Pivot} kanban {Kanban} chart {Chart} ganttChart {Timelines} calendar {Calendar} map {Map} search {Search} table {Table} smartDoc {Smart Document}}',
-      },
-      {
-        perspective,
-      }
-    );
-  }
+export class SmartdocPerspectiveComponent {
+  @ViewChild(CollapsibleSidebarComponent, {read: ElementRef, static: false})
+  public sidebarComponent: ElementRef;
 }

@@ -1,0 +1,12 @@
+
+    <div class="d-flex bd-highlight">
+      <div class="container" [ngStyle]="{'grid-template-columns': row.type}"
+           cdkDropList
+           cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+        <smartdoc-cell *ngFor="let cell of row.cells"
+          [color]="cell.color"
+          [caption]="cell.caption"
+          cdkDrag>
+        </smartdoc-cell>
+      </div>
+    </div>

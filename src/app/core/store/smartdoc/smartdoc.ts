@@ -16,29 +16,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+export const DEFAULLT_SMARTDOC_ID = 'default';
 
-import {Injectable, Pipe, PipeTransform} from '@angular/core';
-import {I18n} from '@ngx-translate/i18n-polyfill';
+export interface SmartDoc {
+  id: string;
+  config?: SmartDocConfig;
+}
 
-@Pipe({
-  name: 'perspectiveName',
-})
-@Injectable({
-  providedIn: 'root',
-})
-export class PerspectiveNamePipe implements PipeTransform {
-  public constructor(private i18n: I18n) {}
+export interface SmartDocConfig {
+  version?: SmartDocVersion;
+}
 
-  public transform(perspective: string): string {
-    return this.i18n(
-      {
-        id: 'view.perspective.name',
-        value:
-          '{perspective, select, detail {Detail} pivot {Pivot} kanban {Kanban} chart {Chart} ganttChart {Timelines} calendar {Calendar} map {Map} search {Search} table {Table} smartDoc {Smart Document}}',
-      },
-      {
-        perspective,
-      }
-    );
-  }
+export enum SmartDocVersion {
+  V1 = '1',
+}
+
+export enum DivisionType {
+  D1111 = '1fr 1fr 1fr 1fr',
+  D112 = '1fr 1fr 2fr',
+  D121 = '1fr 2fr 1fr',
+  D211 = '2fr 1fr 1fr',
+  D13 = '1fr 3fr',
+  D31 = '3fr 1fr',
+  D22 = '2fr 2fr',
+  D4 = 'auto',
+}
+
+export interface SmartDocRow {
+  id: string;
+  type: DivisionType;
+  rank: number;
+  cells: SmartDocCell[];
+}
+
+export interface SmartDocRowsCollection {
+  id: string;
+  rows: SmartDocRow[];
+}
+
+export interface SmartDocCell {
+  id: string;
+  color: string;
+  tableName: string;
+  isUsed: boolean;
+  caption: string;
 }
