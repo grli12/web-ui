@@ -1,4 +1,10 @@
 .container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.placeholder {
+  background: #ccc;
+  border: dotted 3px #999;
+  min-height: 60px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

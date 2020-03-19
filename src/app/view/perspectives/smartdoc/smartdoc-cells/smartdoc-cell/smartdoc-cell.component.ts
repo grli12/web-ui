@@ -17,7 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
+import {SmartDocCell} from '../../../../../core/store/smartdoc/smartdoc';
 
 @Component({
   selector: 'smartdoc-cell',
@@ -31,4 +32,25 @@ export class SmartdocCellComponent {
 
   @Input()
   public caption: string;
+
+  @Input()
+  public isUsed = false;
+
+  @Input()
+  public id: string;
+
+  @Input()
+  public tableName: string;
+
+  @Input()
+  public selectedCellId: string = '';
+
+  @Output()
+  public cellSelected: EventEmitter<{cellId: string}> = new EventEmitter<{cellId: string}>();
+
+  public onClick() {
+    //this.isSelected = !this.isSelected;
+    console.log('Cell click. cellId: ' + this.id);
+    this.cellSelected.emit({cellId: this.id});
+  }
 }

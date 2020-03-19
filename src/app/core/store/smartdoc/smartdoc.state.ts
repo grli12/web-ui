@@ -18,7 +18,7 @@
  */
 
 import {createEntityAdapter, EntityState} from '@ngrx/entity';
-import {DEFAULLT_SMARTDOC_ID, SmartDoc} from './smartdoc';
+import {DEFAULT_SMARTDOC_ID, SmartDoc} from './smartdoc';
 import {AppState} from '../app.state';
 import {createSelector, createSelectorFactory} from '@ngrx/store';
 
@@ -41,7 +41,7 @@ export const selectSmartDocById = id =>
     smartDoc => smartDoc[id]
   );
 
-export const selectDefaultSmartDoc = selectSmartDocById(DEFAULLT_SMARTDOC_ID);
+export const selectDefaultSmartDoc = selectSmartDocById(DEFAULT_SMARTDOC_ID);
 
 export const selectSmartDocConfig = createSelector(
   selectDefaultSmartDoc,

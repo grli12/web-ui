@@ -2,11 +2,21 @@
     <div class="d-flex bd-highlight">
       <div class="container" [ngStyle]="{'grid-template-columns': row.type}"
            cdkDropList
-           cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
-        <smartdoc-cell *ngFor="let cell of row.cells"
-          [color]="cell.color"
-          [caption]="cell.caption"
-          cdkDrag>
-        </smartdoc-cell>
+           cdkDropListOrientation="horizontal"
+           (cdkDropListDropped)="onDropListDropped($event)"
+      >
+          <smartdoc-cell
+            *ngFor="let cell of row.cells"
+            [color]="cell.color"
+            [caption]="cell.caption"
+            [isUsed]="cell.isUsed"
+            [tableName]="cell.tableName"
+            [id]="cell.id"
+            [selectedCellId]="selectedCellId"
+            (cellSelected)="onCellSelected($event)"
+            cdkDrag
+          >
+            <div class="placeholder" *cdkDragPlaceholder></div>
+          </smartdoc-cell>
       </div>
     </div>

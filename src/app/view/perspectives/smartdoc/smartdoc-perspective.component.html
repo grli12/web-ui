@@ -2,7 +2,10 @@
 <ng-container>
   <p align="center">smartdoc-perspective works!</p>
   <div class="card" [style.width.px]="1000" >
-    <smartdoc-rows class = "w-100"></smartdoc-rows>
+    <smartdoc-rows class = "w-100"
+                   [rows]="rowsCollection.rows"
+                   (cellSelected)="onCellSelected($event)"
+    ></smartdoc-rows>
   </div>
   <!--invalid-query class="w-100"
                  [minCollections]="1">
@@ -10,8 +13,9 @@
 
 
   <collapsible-sidebar
-    [collapsed]=true>
-    <smartdoc-cells></smartdoc-cells>
+    [collapsed]=sidebarCollapsed>
+    <smartdoc-cells (sidebarCellSelected)="onSidebarCellSelected($event)"
+    ></smartdoc-cells>
   </collapsible-sidebar>
 
 

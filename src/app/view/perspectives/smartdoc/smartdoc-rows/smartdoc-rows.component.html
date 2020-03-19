@@ -1,8 +1,10 @@
 
 <div class="grid-container"  cdkDropList id="list-rows" (cdkDropListDropped)="drop($event)" #origin>
     <smartdoc-row
-      *ngFor="let row of rowsCollection.rows; let i = index"
+      *ngFor="let row of rows; let i = index "
       [row]="row"
+      [selectedCellId]="selectedCell.cellId"
+      (cellSelected)="onCellSelected($event)"
       cdkDrag
     >
     </smartdoc-row>

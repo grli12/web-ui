@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-export const DEFAULLT_SMARTDOC_ID = 'default';
+export const DEFAULT_SMARTDOC_ID = 'default';
 
 export interface SmartDoc {
   id: string;

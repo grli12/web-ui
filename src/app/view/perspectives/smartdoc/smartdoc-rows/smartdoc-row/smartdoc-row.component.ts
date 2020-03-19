@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
-import {DivisionType, SmartDocRow} from '../../../../../core/store/smartdoc/smartdoc';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
+import {DivisionType, SmartDocCell, SmartDocRow} from '../../../../../core/store/smartdoc/smartdoc';
+import {CdkDragDrop, CdkDragEnter, CdkDragMove, CdkDragSortEvent, moveItemInArray} from '@angular/cdk/drag-drop';
 @Component({
   selector: 'smartdoc-row',
   templateUrl: './smartdoc-row.component.html',
@@ -30,9 +30,22 @@ export class SmartdocRowComponent {
   @Input()
   public row: SmartDocRow;
 
-  public readonly divisionType = DivisionType;
+  @Input()
+  public selectedCellId: string = '';
 
-  public drop(event: CdkDragDrop<string[]>) {
+  @Output()
+  public cellSelected: EventEmitter<{rowId: string; cellId: string}> = new EventEmitter<{
+    rowId: string;
+    cellId: string;
+  }>();
+
+  public onDropListDropped(event: CdkDragDrop<SmartDocRow[]>) {
     moveItemInArray(this.row.cells, event.previousIndex, event.currentIndex);
+  }
+
+  onCellSelected(eventArg: {cellId: string}) {
+    console.log('ROW COMPONENT -> [input]- cellId: ' + eventArg.cellId);
+    console.log('ROW COMPONENT -> [output]- cellId: ' + eventArg.cellId + ', rowId: ' + this.row.id);
+    this.cellSelected.emit({rowId: this.row.id, cellId: eventArg.cellId});
   }
 }

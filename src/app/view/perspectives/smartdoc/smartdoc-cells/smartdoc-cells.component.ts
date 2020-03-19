@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
 import {SmartDocCell} from '../../../../core/store/smartdoc/smartdoc';
 
 @Component({
@@ -27,10 +27,16 @@ import {SmartDocCell} from '../../../../core/store/smartdoc/smartdoc';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SmartDocCellsComponent {
-  private cells: SmartDocCell[] = [
-    {id: '1', tableName: 'users', caption: 'Name', color: 'red', isUsed: false},
-    {id: '2', tableName: 'users', caption: 'Gender', color: 'red', isUsed: false},
-    {id: '3', tableName: 'users', caption: 'Age', color: 'red', isUsed: false},
-    {id: '4', tableName: 'customers', caption: 'Name', color: 'blue', isUsed: false},
+  @Output()
+  public sidebarCellSelected: EventEmitter<SmartDocCell> = new EventEmitter<SmartDocCell>();
+  public cells: SmartDocCell[] = [
+    {id: 's1', tableName: 'users', caption: 'Name', color: 'red', isUsed: false},
+    {id: 's2', tableName: 'users', caption: 'Gender', color: 'red', isUsed: false},
+    {id: 's3', tableName: 'users', caption: 'Age', color: 'red', isUsed: false},
+    {id: 's4', tableName: 'customers', caption: 'Name', color: 'blue', isUsed: false},
   ];
+
+  onCellSelected(eventArg: {cellId: string}) {
+    this.sidebarCellSelected.emit(this.cells.find(c => c.id == eventArg.cellId));
+  }
 }
